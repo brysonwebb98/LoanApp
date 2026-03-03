@@ -1,0 +1,101 @@
+<%- include("../partials/header")%>
+    <main>
+        <h1>Application Page</h1>
+        <form method="POST" action="/application" class="application">
+
+            <!-- PERSONAL INFO -->
+            <fieldset>
+                <legend>Personal Information</legend>
+
+                <div class="form-group">
+                    <label for="fname">First Name:</label>
+                    <input type="text" id="fname" name="first_name" minlength="2" maxlength="25" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="lname">Last Name:</label>
+                    <input type="text" id="lname" name="last_name" minlength="2" maxlength="25" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="dob">Date of Birth:</label>
+                    <input type="date" id="dob" name="dob" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="ssn">SSN:</label>
+                    <input type="text" id="ssn" name="ssn" pattern="\d{3}-\d{2}-\d{4}" placeholder="123-45-6789" required>
+                </div>
+            </fieldset>
+
+            <!-- LIVING INFO -->
+            <fieldset>
+                <legend>Living Information</legend>
+
+                <div class="form-group">
+                    <label for="address">Address:</label>
+                    <input type="text" id="address" name="address" required>
+                </div>
+
+                <!-- I need to make sure within my script that Months and Years aren't required but one must be. -->
+                <div class="form-group">
+                    <label for="time_years">Time at Address (Years):</label>
+                    <input type="text" id="time_years" name="time_at_address_years" min="0" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="time_months">Time at Address (Months):</label>
+                    <input type="textr" id="time_months" name="time_at_address_months" min="0"> 
+                </div>
+
+                <div class="form-group">
+                    <label for="address_type">Address Type:</label>
+                    <select id="address_type" name="address_type" required>
+                        <option value="">Select</option>
+                        <option value="rent">Rent</option>
+                        <option value="living_with_others">Living with Others</option>
+                        <option value="mortgage">Mortgage</option>
+                        <option value="owned_free_clear">Owned Free & Clear</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="housing_payment">Rent / Mortgage Amount:</label>
+                    <input type="text" id="housing_payment" name="housing_payment" min="0" placeholder="0.00" required>
+                </div>
+            </fieldset>
+
+            <!-- EMPLOYMENT INFO -->
+            <fieldset>
+                <legend>Employment Information</legend>
+
+                <div class="form-group">
+                    <label for="employer">Employer Name:</label>
+                    <input type="text" id="employer" name="employer_name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="job_title">Job Title:</label>
+                    <input type="text" id="job_title" name="job_title" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="pay_type">Paid:</label>
+                    <select id="pay_type" name="pay_type" required>
+                        <option value="">Select</option>
+                        <option value="hourly">Hourly</option>
+                        <option value="salary">Salary</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="income" id="income_label">Income Amount:</label>
+                    <input type="text" id="income" name="income_amount" min="0" required>
+                </div>
+            </fieldset>
+
+            <button type="submit">Submit Application</button>
+
+        </form>
+    </main>
+<%- include("../partials/footer")  %>

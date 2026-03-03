@@ -1,0 +1,45 @@
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+
+    .main-header {
+        width: 100%;
+        background-color: #ffa500;
+    }
+
+    & .main-header nav {
+        width: 100%;
+        border: 1px solid white;
+        font-size: 40px;
+        
+        justify-content: center;
+                
+        ul {
+            display: flex;
+            justify-content: space-evenly;
+            flex-direction: row;
+            list-style-type: none;
+            gap: 20px;
+        }
+
+        li {
+            display: inline;
+        }
+
+        a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            &:hover {
+                color: #4d90fe;
+            }
+        }
+    }
+}

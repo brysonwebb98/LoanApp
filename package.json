@@ -1,0 +1,31 @@
+{
+  "name": "loanapp",
+  "version": "1.0.0",
+  "description": "This application is a server-side web system that allows users to submit loan applications and track their approval status. The system also provides access for credit managers to review, approve, or deny submitted applications.",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon server.js",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brysonwebb98/LoanApp.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/brysonwebb98/LoanApp/issues"
+  },
+  "homepage": "https://github.com/brysonwebb98/LoanApp#readme",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "connect-pg-simple": "^10.0.0",
+    "dotenv": "^17.3.1",
+    "ejs": "^4.0.1",
+    "express": "^5.2.1",
+    "express-session": "^1.19.0",
+    "express-validator": "^7.3.1",
+    "pg": "^8.19.0"
+  }
+}
