@@ -1,5 +1,5 @@
 const applicationPage = (req, res) => {
-    res.render("forms/application", {title: "Application"})
+    res.render("forms/application/form.ejs", {title: "Application"})
 }
 
 export {applicationPage};

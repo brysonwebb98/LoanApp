@@ -3,11 +3,10 @@ main {
 
     h1 {
         font-size: 50px;
-        background-color: white;
+
     }
 
     form {
-        background-color: white;
         font-size: 25px;
 
         fieldset {

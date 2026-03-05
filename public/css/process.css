@@ -1,0 +1,40 @@
+main {
+
+    width: 80%;
+
+    h1 {
+        font-size: 40px;
+    }
+
+    .process-step {
+        border: 2px solid black;
+        margin: 40px;
+        border-radius: 10px;
+        background-color: white;
+
+        h2 {
+            font-size: 30px;
+        }
+
+        p {
+            font-size: 25px;
+        }
+    }
+
+    .final-step {
+        margin-top: 40px;
+
+        h2 {
+            
+            a {
+                text-decoration: none;
+                font-size: 50px;
+                color: #4d90fe;
+                &:hover { 
+                    color: #ffa500;
+                    cursor: pointer;
+                    }
+            }
+        }
+    }
+}

@@ -1,5 +1,5 @@
 const loginPage = (req, res) => {
-    res.render('forms/login', {title: "Login Page"})
+    res.render('forms/login/form.ejs', {title: "Login Page"})
 }
 
 export {loginPage};
