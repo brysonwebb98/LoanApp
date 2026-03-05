@@ -4,6 +4,7 @@ import express from "express";
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { setHeadAssetsFunctionality, getCurrentGreeting } from "./src/middleware/global.js";
+import { setupDatabase, testConnection } from './src/models/setup.js';
 
 // MVC Components
 import routes from './src/controllers/routes.js';
@@ -47,7 +48,7 @@ app.use((req, res, next) => {
 
 // Global Error Handler
 app.use((err, req, res, next) => {
-    console.error(err.stack || err);
+    
     // Preventing infinate loops, if a response has already been sent, do nothing
     if (res.headersSent || res.finished) {
         return next(err);
@@ -76,6 +77,8 @@ app.use((err, req, res, next) => {
 });
 
 // Start Server
-app.listen(PORT, () => {
+app.listen(PORT, async () => {
+    await setupDatabase();
+    await testConnection();
     console.log(`Server is running on http://127.0.0.1:${PORT}`);
 });
