@@ -1,0 +1,43 @@
+main {
+    width: 60%;
+
+    h1 {
+        font-size: 50px;
+
+    }
+
+    form {
+        font-size: 25px;
+        
+        fieldset {
+            background-color: white;
+            margin: 30px;
+            border-radius: 10px;
+            
+            legend {
+                font-size: 30px;
+                text-align: left;
+                font-weight: bold;
+                
+            }
+        }
+
+        .form-group {
+            margin: 10px;
+        }
+
+        button {
+            width: 150px;
+            height: 120px;
+            font-size: 25px;
+            background-color: white;
+            border-radius: 10px;
+            &:hover {
+                background-color: #4d90fe;
+                color: white;
+                cursor: pointer;
+            }
+        }
+    }
+}
+

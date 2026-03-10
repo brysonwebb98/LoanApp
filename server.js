@@ -1,10 +1,13 @@
 // Main Dependencies
 import "dotenv/config";
 import express from "express";
+import session from "express-session";
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { setHeadAssetsFunctionality, getCurrentGreeting } from "./src/middleware/global.js";
 import { setupDatabase, testConnection } from './src/models/setup.js';
+import connectPgSimple from "connect-pg-simple";
+import { caCert } from "./src/models/db.js";
 
 // MVC Components
 import routes from './src/controllers/routes.js';
@@ -19,10 +22,36 @@ const PORT = process.env.PORT || 3000;
 // Express Setup
 const app = express();
 
+// Initialize PostgreSQL session store
+const pgSession = connectPgSimple(session);
+
 // Middleware
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(session({
+    store: new pgSession({
+        conObject: {
+            connectionString: process.env.DB_URL,
+            // Configure SSL for session store connection (required by BYU-I databases)
+            ssl: {
+                ca: caCert,
+                rejectUnauthorized: true,
+                checkServerIdentity: () => { return undefined; }
+            }
+        },
+        tableName: 'session',
+        createTableIfMissing: true
+    }),
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        secure: NODE_ENV.includes('dev') !== true,
+        httpOnly: true,
+        maxAge: 24 * 60 * 60 * 1000
+    }
+}));
 
 // View Engine
 app.set("view engine", "ejs");

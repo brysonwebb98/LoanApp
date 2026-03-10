@@ -1,10 +1,10 @@
 import { Router } from "express";
-import { homePage } from "./home.js";
-import { loginPage } from "./forms/login.js";
-import { applicationPage } from "./forms/application.js";
-import { aboutPage } from "./about.js";
+import { homePage, aboutPage, processPage } from "./index.js";
+import { loginPage, loginUser } from "./forms/login.js";
+import { applicationPage, createLoan } from "./forms/application.js";
 import { registerPage } from "./forms/register.js";
-import { processPage } from "./process.js";
+import { loanPage } from "./loans/dashboard.js";
+import { createUser } from "./forms/register.js";
 
 const router = Router();
 
@@ -38,10 +38,25 @@ router.get("/register", (req, res) => {
     registerPage(req, res);
 });
 
+// REGISTRATION POST
+router.post("/register", createUser);
+
 // PROCESS PAGE
 router.get("/process", (req, res) => {
     res.addStyle('<link rel="stylesheet" href="/css/process.css">')
     processPage(req, res);
 });
+
+// DASHBOARD PAGE
+router.get("/dashboard", (req, res) => {
+    res.addStyle('<link rel="stylesheet" href="/css/dashboard.css">')
+    loanPage(req, res);
+});
+
+// POSTING THE APPLICATION TO THE DATABASE
+router.post("/apply", createLoan);
+
+// LOGIN PAGE POST
+router.post("/login", loginUser);
 
 export default router;

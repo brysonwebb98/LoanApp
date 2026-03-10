@@ -1,7 +1,7 @@
 <%- include("../../partials/header")%>
     <main>
         <h1>Application Page</h1>
-        <form method="POST" action="/application" class="application">
+        <form method="POST" action="/apply" class="application">
 
             <!-- PERSONAL INFO -->
             <fieldset class="personal-info">
@@ -13,7 +13,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="lname">Last Name:</label>
+                    <label for="last_name">Last Name:</label>
                     <input type="text" id="last_name" name="last_name" minlength="2" maxlength="25" required>
                 </div>
 
@@ -37,7 +37,6 @@
                     <input type="text" id="address" name="address" class="full-address" required placeholder="Main St, Rexburg, ID 83440">
                 </div>
 
-                <!-- I need to make sure within my script that Months and Years aren't required but one must be. -->
                 <div class="form-group">
                     <label for="time_at_address_years">Time at Address (Years):</label>
                     <input type="text" id="time_at_address_years" name="time_at_address_years" min="0" required>
@@ -65,8 +64,8 @@
                 <legend>Employment Info</legend>
 
                 <div class="form-group">
-                    <label for="employer">Employer Name:</label>
-                    <input type="text" id="employer" name="employer_name" required>
+                    <label for="employer_name">Employer Name:</label>
+                    <input type="text" id="employer_name" name="employer_name" required>
                 </div>
 
                 <div class="form-group">
@@ -84,9 +83,34 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="income" id="income_label">Income Amount:</label>
-                    <input type="text" id="income" name="income_amount" min="0" required>
+                    <label for="income_amount">Income Amount:</label>
+                    <input type="text" id="income_amount" name="income_amount" min="0" required>
                 </div>
+            </fieldset>
+
+            <fieldset class="request-info">
+                <legend>Requested Loan</legend>
+                <div class="form-group">
+                    <label for="loan_type">Loan Type</label>
+                    <select id="loan_type" name="loan_type" required>
+                        <option value="">Select</option>
+                        <option value="auto">Auto</option>
+                        <option value="personal">Personal</option>
+                        <option value="mortgage">Mortgage</option>
+                        <option value="card">Credit Card</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="amount">Amount</label>
+                    <input type="number" id="amount" name="amount" min="1000" max="5000000" step="1" required placeholder="Example: 50000">
+                </div>
+
+                <div class="form-group">
+                    <label for="term">Loan Term (months)</label>
+                    <input type="number" id="term" name="term" min="6" max="360" required>
+                </div>
+
             </fieldset>
 
             <button type="submit">Submit Application</button>

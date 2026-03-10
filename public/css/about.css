@@ -9,7 +9,7 @@ body {
     flex-direction: column;
 
     main {
-        width: 100%;
+        width: 80%;
         flex: 1;
 
         .hero-description {
@@ -17,11 +17,21 @@ body {
             font-size: 25px;
             margin-top: 0px;
         }
-    }
 
-    h1 {
+        h1 {
         color: #4d90fe;
         font-size: 50px;
         margin-bottom: 1px;
+        }
+        
+        .about-step{
+            padding: 15px;
+            border: 2px solid black;
+            margin: 40px;
+            border-radius: 10px;
+            background-color: white;
+        }
     }
+
+    
 }

@@ -29,16 +29,20 @@ CREATE TABLE applications (
     ssn_last4 CHAR(4) NOT NULL,
 
     address VARCHAR(150) NOT NULL,
-    address_type VARCHAR(50) NOT NULL,
     time_at_address_years INTEGER NOT NULL,
+    address_type VARCHAR(50) NOT NULL,
+    housing_payment NUMERIC(10,2) NOT NULL,
 
     employer_name VARCHAR(100) NOT NULL,
     job_title VARCHAR(100) NOT NULL,
     pay_type VARCHAR(10) NOT NULL,
     income_amount NUMERIC(10,2) NOT NULL,
 
-    status VARCHAR(20) DEFAULT 'submitted',
+    loan_type VARCHAR(50) NOT NULL,
+    amount NUMERIC(10,2) NOT NULL,
+    term INTEGER NOT NULL,
 
+    status VARCHAR(20) DEFAULT 'submitted',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 
     FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
@@ -74,10 +78,14 @@ INSERT INTO applications (
     address,
     address_type,
     time_at_address_years,
+    housing_payment,
     employer_name,
     job_title,
     pay_type,
     income_amount,
+    loan_type,
+    amount,
+    term,
     status
 ) VALUES
 (
@@ -87,12 +95,16 @@ INSERT INTO applications (
     '1998-01-01',
     '1234',
     '123 Main St, Rexburg, ID 83440',
-    'Rent',
+    'rent',
     2,
+    1200.00,
     'Example Company',
     'Clerk',
     'hourly',
     3200.00,
+    'personal',
+    5000.00,
+    36,
     'submitted'
 );
 

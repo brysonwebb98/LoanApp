@@ -1,0 +1,20 @@
+<%- include("partials/header") %>
+<main>
+    <h1>My Loan Applications</h1>
+
+    <% if (loans.length === 0) { %>
+        <p>You have not submitted any loan applications yet.</p>
+    <% } %>
+
+    <% loans.forEach(loan => { %>
+        <section>
+            <h2><%= loan.loan_type %> Loan</h2>
+            <p>Applicant: <%= loan.first_name %> <%= loan.last_name %></p>
+            <p>Amount: $<%= loan.amount %></p>
+            <p>Term: <%= loan.term %> months</p>
+            <p>Status: <%= loan.status %></p>
+            <hr>
+        </section>
+    <% }) %>
+</main>
+<%- include("partials/footer") %>

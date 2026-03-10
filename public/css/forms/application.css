@@ -25,7 +25,7 @@ main {
             }
         }
 
-        .personal-info, .living-info, .employement-info {
+        .personal-info, .living-info, .employement-info, .request-info {
             background-color: white;
             
             .form-group {
