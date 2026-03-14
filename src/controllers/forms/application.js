@@ -1,4 +1,5 @@
 import { insertLoan } from "../../models/forms/application.js";
+import { insertDebt } from "../../models/forms/debt.js";
 
 const applicationPage = (req, res) => {
     res.render("forms/application/form.ejs", {title: "Application"})
@@ -21,12 +22,17 @@ async function createLoan(req, res) {
         income_amount,
         loan_type,
         amount,
-        term
+        term,
+        has_debt,
+        debt_type,
+        creditor_name,
+        monthly_payment,
+        balance_outstanding
     } = req.body;
 
     const user_id = req.session.user_id;
 
-    await insertLoan(
+    const loanResult = await insertLoan(
         user_id,
         first_name, 
         last_name, 
@@ -44,6 +50,35 @@ async function createLoan(req, res) {
         amount,
         term
     );
+
+    const application_id = loanResult.rows[0].application_id;
+
+    if (has_debt === "yes") {
+
+        if (Array.isArray(debt_type)) {
+            // multiple debts
+            for (let i = 0; i < debt_type.length; i++) {
+                await insertDebt(
+                    application_id,
+                    debt_type[i],
+                    creditor_name[i],
+                    monthly_payment[i],
+                    balance_outstanding[i]
+                );
+            }
+        } else {
+            // only one debt
+            await insertDebt(
+                application_id,
+                debt_type,
+                creditor_name,
+                monthly_payment,
+                balance_outstanding
+            );
+        }
+
+    }
+    
 
     console.log("DATA SENT SUCCESSFULLY");
     res.redirect("/dashboard");

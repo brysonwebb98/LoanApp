@@ -26,6 +26,7 @@ router.get("/login", redirectIfLoggedIn, (req, res) => {
 // APPLICATION PAGE
 router.get("/application", checkLogin, (req, res) => {
     res.addStyle('<link rel="stylesheet" href="/css/forms/application.css">');
+    res.addScript('<script src="/js/applicationForm.js"></script>')
     applicationPage(req, res);
 });
 

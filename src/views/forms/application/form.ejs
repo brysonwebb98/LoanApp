@@ -113,6 +113,64 @@
 
             </fieldset>
 
+            <!-- CURRENT DEBTS -->
+            <fieldset class="debt-info">
+                <legend>Current Debts</legend>
+                <div class="form-group have-debt">
+                    <label>Do you currently have any debts?</label>
+
+                    <div>
+                        <input type="radio" id="debt_yes" name="has_debt" value="yes">
+                        <label for="debt_yes">Yes</label>
+                    </div>
+
+                    <div>
+                        <input type="radio" id="debt_no" name="has_debt" value="no">
+                        <label for="debt_no">No</label>
+                    </div>
+                </div>
+
+                <div id="debt-section" style="display:none">
+                    <div id="debt-container">
+                        <div class="debt-entry">
+
+                            <div class="form-group">
+                                <label>Debt Type</label>
+                                <select name="debt_type">
+                                    <option value="">Select</option>
+                                    <option value="credit_card">Credit Card</option>
+                                    <option value="auto_loan">Auto Loan</option>
+                                    <option value="student_loan">Student Loan</option>
+                                    <option value="mortgage">Mortgage</option>
+                                    <option value="personal_loan">Personal Loan</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Creditor Name</label>
+                                <input type="text" name="creditor_name">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Monthly Payment</label>
+                                <input type="number" name="monthly_payment" step="0.01">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Balance Outstanding</label>
+                                <input type="number" name="balance_outstanding" step="0.01">
+                            </div>
+
+                        </div>
+                    </div>
+                    <button type="button" id="add-debt">Add another debt</button>
+                </div>
+
+
+            </fieldset>
+
+
             <button type="submit">Submit Application</button>
 
         </form>
