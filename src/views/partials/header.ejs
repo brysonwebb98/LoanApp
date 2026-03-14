@@ -13,11 +13,26 @@
     <header class="main-header">
         <nav>
             <ul>
-                <li><a href="/">HOME</a></li>
-                <li><a href="/about">ABOUT</a></li>
-                <li><a href="/process">PROCESS</a></li>
-                <li><a href="/application">APPLY</a></li>
-                <li><a href="/login">LOGIN</a></li>
+                <a href="/">Home</a>
+                <a href="/about">About</a>
+                <a href="/process">Process</a>
+
+                <% if (user_id) { %>
+
+                    <% if (role === "credit_manager") { %>
+                        <a href="/review">Review Loans</a>
+                    <% } else { %>
+                        <a href="/dashboard">Dashboard</a>
+                        <a href="/application">Apply</a>
+                    <% } %>
+
+                    <a href="/logout">Logout</a>
+
+                <% } else { %>
+                    <a href="/login">Login</a>
+                    <a href="/register">Register</a>
+
+                <% } %>
             </ul>
         </nav>
     </header>

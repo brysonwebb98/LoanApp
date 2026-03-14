@@ -1,10 +1,13 @@
 import { Router } from "express";
 import { homePage, aboutPage, processPage } from "./index.js";
-import { loginPage, loginUser } from "./forms/login.js";
+import { loginPage, loginUser, logoutUser } from "./forms/login.js";
 import { applicationPage, createLoan } from "./forms/application.js";
 import { registerPage } from "./forms/register.js";
 import { loanPage } from "./loans/dashboard.js";
 import { createUser } from "./forms/register.js";
+import {checkLogin, redirectIfLoggedIn, checkCreditManager, checkApplicant} from "../middleware/auth.js"
+import { buildManagerDashboard} from "./loans/review.js";
+
 
 const router = Router();
 
@@ -15,13 +18,13 @@ router.get("/", (req, res) => {
 });
 
 // LOGIN PAGE
-router.get("/login", (req, res) => {
+router.get("/login", redirectIfLoggedIn, (req, res) => {
     res.addStyle('<link rel="stylesheet" href="/css/forms/login.css">');
     loginPage(req, res);
 });
 
 // APPLICATION PAGE
-router.get("/application", (req, res) => {
+router.get("/application", checkLogin, (req, res) => {
     res.addStyle('<link rel="stylesheet" href="/css/forms/application.css">');
     applicationPage(req, res);
 });
@@ -33,13 +36,10 @@ router.get("/about", (req, res) => {
 });
 
 // REGISTRATION PAGE
-router.get("/register", (req, res) => {
+router.get("/register", redirectIfLoggedIn, (req, res) => {
     res.addStyle('<link rel="stylesheet" href="/css/forms/register.css">')
     registerPage(req, res);
 });
-
-// REGISTRATION POST
-router.post("/register", createUser);
 
 // PROCESS PAGE
 router.get("/process", (req, res) => {
@@ -48,15 +48,27 @@ router.get("/process", (req, res) => {
 });
 
 // DASHBOARD PAGE
-router.get("/dashboard", (req, res) => {
+router.get("/dashboard", checkApplicant, checkLogin, (req, res) => {
     res.addStyle('<link rel="stylesheet" href="/css/dashboard.css">')
     loanPage(req, res);
 });
 
+// REVIEW PAGE
+router.get("/review", checkLogin, checkCreditManager, (req, res, next) => {
+    res.addStyle('<link rel="stylesheet" href="/css/dashboard.css">')
+    buildManagerDashboard(req, res, next);
+});
+
+// LOGOUT TO REDIRECT TO HOME PAGE
+router.get("/logout", checkLogin, logoutUser);
+
 // POSTING THE APPLICATION TO THE DATABASE
-router.post("/apply", createLoan);
+router.post("/application", checkLogin, createLoan);
 
 // LOGIN PAGE POST
-router.post("/login", loginUser);
+router.post("/login", redirectIfLoggedIn, loginUser);
+
+// REGISTRATION POST
+router.post("/register", redirectIfLoggedIn, createUser);
 
 export default router;

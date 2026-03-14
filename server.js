@@ -61,6 +61,8 @@ app.use((req, res, next) => {
     setHeadAssetsFunctionality(res);
     res.locals.currentYear = new Date().getFullYear();
     res.locals.greeting = getCurrentGreeting();
+    res.locals.user_id = req.session.user_id || null;
+    res.locals.role = req.session.role || null;
     next();
 })
 
@@ -70,6 +72,7 @@ app.use('/', routes);
 // Error Handling
 // 404 Handler
 app.use((req, res, next) => {
+    console.log("404 REQUEST:", req.method, req.originalUrl);
     const err = new Error('Page Not Found');
     err.status = 404;
     next(err);
@@ -77,6 +80,7 @@ app.use((req, res, next) => {
 
 // Global Error Handler
 app.use((err, req, res, next) => {
+    console.error("GLOBAL ERROR:", err);
     
     // Preventing infinate loops, if a response has already been sent, do nothing
     if (res.headersSent || res.finished) {

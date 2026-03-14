@@ -66,4 +66,11 @@ async function getLoans(user_id) {
     return result.rows;
 }
 
-export { insertLoan, getLoans };
+async function getAllApplications() {
+    const sql = `SELECT * FROM applications
+    ORDER BY application_id DESC`
+    const result = await db.query(sql);
+    return result.rows;
+}
+
+export { insertLoan, getLoans, getAllApplications };

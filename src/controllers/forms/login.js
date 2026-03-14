@@ -20,6 +20,7 @@ const loginUser = async (req, res) => {
         }
         // IF THERE IS A USER DOES THE PASSSWORD MATCH?
         const passwordCorrect = await verifyPassword(password, user.password_hash)
+
         if (!passwordCorrect)
         {
             return res.redirect('/login');
@@ -27,12 +28,26 @@ const loginUser = async (req, res) => {
 
         delete user.password_hash;
         req.session.user_id = user.user_id;
-        console.log(req.session);
-        return res.redirect('/dashboard');
+        req.session.role = user.role;
+        req.session.username = user.username;
+        
+        if (user.role === "credit_manager") {
+            return res.redirect("/review");
+        } else {
+            return res.redirect("/dashboard");
+}
+
     } catch (err) {
         console.error(err);
     }
 
+
 }
 
-export {loginPage, loginUser};
+function logoutUser(req, res) {
+    req.session.destroy(() => {
+        res.redirect("/");
+    });
+}
+
+export {loginPage, loginUser, logoutUser};
