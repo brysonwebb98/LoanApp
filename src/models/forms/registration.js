@@ -20,4 +20,15 @@ async function insertUser (
     ]);
 }
 
-export {insertUser};
+async function emailExists(email) {
+    const sql = `
+    SELECT email 
+    FROM users
+    WHERE email = $1
+    `;
+
+    const result = await db.query(sql, [email]);
+    return result.rowCount > 0;
+}
+
+export {insertUser, emailExists};

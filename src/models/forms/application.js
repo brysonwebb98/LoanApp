@@ -73,4 +73,22 @@ async function getAllApplications() {
     return result.rows;
 }
 
-export { insertLoan, getLoans, getAllApplications };
+async function getAllApplicationsWithDebts() {
+    const sql = `
+        SELECT
+            a.*,
+            d.debt_id,
+            d.debt_type,
+            d.creditor_name,
+            d.monthly_payment,
+            d.balance_outstanding
+        FROM applications a
+        LEFT JOIN debts d
+            ON a.application_id = d.application_id
+        ORDER BY a.application_id DESC, d.debt_id ASC
+    `;
+    const result = await db.query(sql);
+    return result.rows;
+}
+
+export { insertLoan, getLoans, getAllApplications, getAllApplicationsWithDebts };

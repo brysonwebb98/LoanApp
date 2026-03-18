@@ -65,8 +65,7 @@ CREATE TABLE debts (
 
 -- Insert test users
 INSERT INTO users (username, email, password_hash, role) VALUES
-('testuser', 'testuser@example.com', 'password_hash_placeholder', 'applicant'),
-('admin', 'admin@example.com', 'password_hash_placeholder', 'admin');
+('testuser', 'testuser@example.com', 'password_hash_placeholder', 'applicant');
 
 -- Insert test application
 INSERT INTO applications (

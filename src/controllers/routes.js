@@ -5,8 +5,9 @@ import { applicationPage, createLoan } from "./forms/application.js";
 import { registerPage } from "./forms/register.js";
 import { loanPage } from "./loans/dashboard.js";
 import { createUser } from "./forms/register.js";
-import {checkLogin, redirectIfLoggedIn, checkCreditManager, checkApplicant} from "../middleware/auth.js"
-import { buildManagerDashboard} from "./loans/review.js";
+import {checkLogin, redirectIfLoggedIn, checkCredit, checkApplicant, checkAdmin} from "../middleware/auth.js"
+import { buildManagerDashboard, updateLoanStatus} from "./loans/review.js";
+import { usersPage, updateUser } from "./users.js";
 
 
 const router = Router();
@@ -49,15 +50,21 @@ router.get("/process", (req, res) => {
 });
 
 // DASHBOARD PAGE
-router.get("/dashboard", checkApplicant, checkLogin, (req, res) => {
+router.get("/dashboard", checkLogin, checkApplicant, (req, res) => {
     res.addStyle('<link rel="stylesheet" href="/css/dashboard.css">')
     loanPage(req, res);
 });
 
 // REVIEW PAGE
-router.get("/review", checkLogin, checkCreditManager, (req, res, next) => {
+router.get("/review", checkLogin, checkCredit, (req, res, next) => {
     res.addStyle('<link rel="stylesheet" href="/css/dashboard.css">')
     buildManagerDashboard(req, res, next);
+});
+
+// USER PAGE
+router.get("/users", checkLogin, checkAdmin, (req, res, next) => {
+    res.addStyle('<link rel="stylesheet" href="/css/dashboard.css">')
+    usersPage(req, res);
 });
 
 // LOGOUT TO REDIRECT TO HOME PAGE
@@ -71,5 +78,11 @@ router.post("/login", redirectIfLoggedIn, loginUser);
 
 // REGISTRATION POST
 router.post("/register", redirectIfLoggedIn, createUser);
+
+// USERS POST PAGE
+router.post("/users", checkLogin, checkAdmin, updateUser);
+
+// REVIEW POST PAGE
+router.post("/review", checkLogin, checkCredit, updateLoanStatus)
 
 export default router;

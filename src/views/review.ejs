@@ -1,14 +1,39 @@
 <%- include("partials/header") %>
+
 <h1>Applications</h1>
 
 <% applications.forEach(application => { %>
-    <div>
-        <h2><%= application.first_name %> <%= application.last_name %></h2>
-        <p>Loan Type: <%= capitalize(application.loan_type) %></p>
-        <p>Amount: <%= application.amount %></p>
-        <p>Income: <%= application.income_amount %></p>
-        <p>Employer: <%= capitalize(application.employer_name) %></p>
-        <hr>
+    <div class="application-card">
+        <section>
+            <form method="POST" action="/review">
+
+                <h2><%= application.first_name %> <%= application.last_name %></h2>
+
+                <p><strong>Loan Type:</strong> <%= capitalize(application.loan_type) %></p>
+                <p><strong>Amount:</strong> $<%= application.amount %></p>
+                <p><strong>Income Type:</strong> <%= application.pay_type%></p>
+                <p><strong>Income:</strong> $<%= application.income_amount %></p>
+                <p><strong>Employer:</strong> <%= capitalize(application.employer_name) %></p>
+                <p><strong>Status:</strong> <%= capitalize(application.status || "pending") %></p>
+
+                <!-- IMPORTANT hidden id -->
+                <input type="hidden" name="application_id" value="<%= application.application_id %>">
+
+                <!-- status update -->
+                <label>Update Status</label>
+                <select name="status" required>
+                    <option value="">Select</option>
+                    <option value="pending">Pending</option>
+                    <option value="approved">Approved</option>
+                    <option value="denied">Denied</option>
+                </select>
+
+                <button type="submit">Update</button>
+
+                <hr>
+            </form>
+        </section>
     </div>
 <% }) %>
+
 <%- include("partials/footer") %>

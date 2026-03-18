@@ -1,0 +1,37 @@
+<%- include("partials/header") %>
+<main>
+    <h1>All Users</h1>
+    <% if (users.length === 0) { %>
+        <p>No current users!</p>
+    <% } %>
+
+    <% users.forEach(user => { %>
+        <section>
+            <form action="/users" method="POST">
+                <h2>Username: <%= user.username %></h2>
+                <p>Role: <%= user.role%></p>
+                <p>Email: <%= user.email%></p>
+                <p>User ID: <%= user.user_id%></p>
+                
+                <!-- Hidden User ID & Role-->
+                <input type="hidden" name="user_id" value="<%= user.user_id %>">
+                <input type="hidden" name="current_role" value="<%= user.role %>">
+
+                <label for="user_role">User Role Update:</label>
+                <select name="role">
+                    <option value="">Select Role</option>
+                    <option value="applicant">Applicant</option>
+                    <option value="credit_manager">Credit Manager</option>
+                    <option value="admin">Admin</option>
+                </select>
+
+                <div class="user-actions">
+                    <button type="submit" name="action" value="update" class="update-role">Update Role</button>
+                    <button type="submit" name="action" value="delete" class="delete-button">Delete User</button>
+                </div>
+            </form>
+        </section>
+        <hr>
+    <% }) %>
+</main>
+<%- include("partials/footer") %>
