@@ -1,4 +1,5 @@
 import {insertUser, emailExists} from "../../models/forms/registration.js"
+import { validationResult } from "express-validator";
 import bcrypt from "bcrypt";
 
 const registerPage = (req, res) => {
@@ -6,6 +7,11 @@ const registerPage = (req, res) => {
 }
 
 async function createUser(req, res) {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        req.flash("error", errors.array()[0].msg);
+        return res.redirect("/register");
+    }
     try {
         const username = req.body.username?.trim();
         const email = req.body.email?.trim().toLowerCase();

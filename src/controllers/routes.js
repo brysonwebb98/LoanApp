@@ -8,6 +8,7 @@ import { createUser } from "./forms/register.js";
 import {checkLogin, redirectIfLoggedIn, checkCredit, checkApplicant, checkAdmin} from "../middleware/auth.js"
 import { buildManagerDashboard, updateLoanStatus} from "./loans/review.js";
 import { usersPage, updateUser } from "./users.js";
+import { registrationValidation} from "../middleware/validation/forms.js";
 
 
 const router = Router();
@@ -77,7 +78,7 @@ router.post("/application", checkLogin, createLoan);
 router.post("/login", redirectIfLoggedIn, loginUser);
 
 // REGISTRATION POST
-router.post("/register", redirectIfLoggedIn, createUser);
+router.post("/register", redirectIfLoggedIn, registrationValidation, createUser);
 
 // USERS POST PAGE
 router.post("/users", checkLogin, checkAdmin, updateUser);
