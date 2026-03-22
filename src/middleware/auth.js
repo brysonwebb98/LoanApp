@@ -9,6 +9,7 @@ function checkLogin(req, res, next) {
 
 function redirectIfLoggedIn(req, res, next) {
     if (req.session.user_id) {
+        req.flash("error", "You are already logged in.")
         return res.redirect("/");
     }
     next();

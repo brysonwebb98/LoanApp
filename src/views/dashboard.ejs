@@ -9,13 +9,17 @@
     <% loans.forEach(loan => { %>
         <section>
             <form action="post" method="POST">
-                <h2><%= capitalize(loan.loan_type) %> Loan</h2>
-                <p>Applicant: <%= loan.first_name %> <%= loan.last_name %></p>
-                <p>Amount: $<%= loan.amount %></p>
-                <p>Term: <%= loan.term %> months</p>
-                <p>Status: <%= capitalize(loan.status) %></p>
-            
-                <hr>
+                <div>
+                    <h2><%= capitalize(loan.loan_type) %> Loan</h2>
+                    <p>Applicant: <%= loan.first_name %> <%= loan.last_name %></p>
+                    <p>Amount: $<%= loan.amount %></p>
+                    <p>Term: <%= loan.term %> months</p>
+                    <p>Status: 
+                        <span class="<%= loan.status.toLowerCase() %>">
+                            <%= capitalize(loan.status) %>
+                        </span>
+                    </p>
+                </div>
             </form>
         </section>
     <% }) %>

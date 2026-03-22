@@ -1,5 +1,5 @@
 main {
-    width: 50%;
+    width: 100%;
 }
 
 section {
@@ -14,14 +14,14 @@ section {
     border-radius: 10px;
 }
 
-section:has(.approved) {
-    background-color: #d4edda;
+button:hover {
+    background-color: #4d90fe;
+    color: white;
 }
 
-section:has(.denied) {
-    background-color: #f8d7da;
+button {
+    margin-top: 10px;
+    font-size: 20px;
+    border-radius: 20px;
 }
 
-section:has(.pending) {
-    background-color: white;
-}

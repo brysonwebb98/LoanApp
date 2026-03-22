@@ -1,5 +1,5 @@
 <%- include("partials/header") %>
-
+<main>
 <h1>Applications</h1>
 
 <% applications.forEach(application => { %>
@@ -14,7 +14,11 @@
                 <p><strong>Income Type:</strong> <%= application.pay_type%></p>
                 <p><strong>Income:</strong> $<%= application.income_amount %></p>
                 <p><strong>Employer:</strong> <%= capitalize(application.employer_name) %></p>
-                <p><strong>Status:</strong> <%= capitalize(application.status || "pending") %></p>
+                <p><strong>Status:</strong> 
+                    <span class="<%= (application.status || 'pending').toLowerCase() %>">
+                        <%= capitalize(application.status || "pending") %>
+                    </span>
+                </p>
 
                 <!-- IMPORTANT hidden id -->
                 <input type="hidden" name="application_id" value="<%= application.application_id %>">
@@ -29,11 +33,9 @@
                 </select>
 
                 <button type="submit">Update</button>
-
-                <hr>
             </form>
         </section>
     </div>
 <% }) %>
-
+</main>
 <%- include("partials/footer") %>

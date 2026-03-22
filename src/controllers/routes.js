@@ -57,13 +57,13 @@ router.get("/dashboard", checkLogin, checkApplicant, (req, res) => {
 
 // REVIEW PAGE
 router.get("/review", checkLogin, checkCredit, (req, res, next) => {
-    res.addStyle('<link rel="stylesheet" href="/css/dashboard.css">')
+    res.addStyle('<link rel="stylesheet" href="/css/review.css">')
     buildManagerDashboard(req, res, next);
 });
 
 // USER PAGE
 router.get("/users", checkLogin, checkAdmin, (req, res, next) => {
-    res.addStyle('<link rel="stylesheet" href="/css/dashboard.css">')
+    res.addStyle('<link rel="stylesheet" href="/css/users.css">')
     usersPage(req, res);
 });
 
