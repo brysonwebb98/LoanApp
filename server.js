@@ -25,6 +25,10 @@ const app = express();
 // Initialize PostgreSQL session store
 const pgSession = connectPgSimple(session);
 
+if (!NODE_ENV.includes('dev')) {
+    app.set('trust proxy', 1);
+}
+
 // Middleware
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: true }));
