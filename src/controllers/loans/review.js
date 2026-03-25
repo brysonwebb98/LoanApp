@@ -9,6 +9,8 @@ function capitalize(word) {
 export async function buildManagerDashboard(req, res) {
     const applications = await getAllApplicationsWithDebts();
 
+    console.log(applications);
+
     res.render("review", {title: "Credit Manager Dashboard", applications, capitalize});
 }
 

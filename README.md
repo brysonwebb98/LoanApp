@@ -1,11 +1,5 @@
 # Loan Application System
 
-## Website URL
-https://loanapp-iwjz.onrender.com/
-
-## Website GitHub
-https://github.com/brysonwebb98/LoanApp
-
 ## Project Overview
 This application is a server-side web system that allows users to submit loan applications and track their approval status. The system also provides access for credit managers to review, approve, or deny submitted applications.
 
@@ -86,3 +80,21 @@ This ensures that only authorized users can access protected parts of the system
 - Use PostgreSQL for persistent data storage
 - Apply middleware for authentication and authorization
 - Follow backend development best practices
+
+--- 
+
+## Website GitHub
+https://github.com/brysonwebb98/LoanApp
+
+--- 
+
+## Website URL
+https://loanapp-iwjz.onrender.com/
+
+### Test Login Credentials
+
+| Role      | Username  | Password |
+|-----------|-----------|----------|
+| Applicant | applicant | Test1234! |
+| Credit    | credit    | Test1234! |
+| Admin     | admin     | Test1234! |

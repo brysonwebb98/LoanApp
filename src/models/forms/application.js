@@ -77,15 +77,13 @@ async function getAllApplicationsWithDebts() {
     const sql = `
         SELECT
             a.*,
-            d.debt_id,
-            d.debt_type,
-            d.creditor_name,
-            d.monthly_payment,
-            d.balance_outstanding
+            COALESCE(SUM(COALESCE(d.monthly_payment,0)),0) AS total_monthly_debt,
+            COALESCE(SUM(COALESCE(d.balance_outstanding,0)),0) AS total_balance
         FROM applications a
         LEFT JOIN debts d
             ON a.application_id = d.application_id
-        ORDER BY a.application_id DESC, d.debt_id ASC
+        GROUP BY a.application_id
+        ORDER BY a.application_id DESC;
     `;
     const result = await db.query(sql);
     return result.rows;

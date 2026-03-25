@@ -35,6 +35,13 @@ main {
                 input {
                     margin-left: 4px;
                 }
+
+                .form-help {
+                    display:block;
+                    font-size:0.85rem;
+                    color:#666;
+                    margin-top:4px;
+                }
             }
         }
     }

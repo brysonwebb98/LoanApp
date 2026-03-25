@@ -1,5 +1,6 @@
 main {
     width: 60%;
+    flex: 1;
 
     h1 {
         font-size: 50px;

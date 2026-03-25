@@ -7,7 +7,7 @@
         <section>
             <form method="POST" action="/review">
 
-                <h2><%= application.first_name %> <%= application.last_name %></h2>
+                <h2>Applicant: <%= application.first_name %> <%= application.last_name %></h2>
 
                 <p><strong>Loan Type:</strong> <%= capitalize(application.loan_type) %></p>
                 <p><strong>Amount:</strong> $<%= application.amount %></p>
@@ -20,6 +20,11 @@
                     </span>
                 </p>
 
+                <hr>
+                <h2>Existing Debts:</h3>
+                <p><strong>Monthly Rent:</strong> $<%= application.housing_payment%></p>
+                <p><strong>Total Monthly Debt:</strong> $<%= application.total_monthly_debt %></p>
+                <p><strong>Total Balances:</strong> $<%= application.total_balance %></p>
                 <!-- IMPORTANT hidden id -->
                 <input type="hidden" name="application_id" value="<%= application.application_id %>">
 

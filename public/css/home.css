@@ -24,6 +24,7 @@ body {
     .hero-buttons {
         display: flex;
         flex-direction: row;
+        justify-self: center;
         
 
         a {
