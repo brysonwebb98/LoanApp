@@ -25,10 +25,10 @@
                 <p><strong>Monthly Rent:</strong> $<%= application.housing_payment%></p>
                 <p><strong>Total Monthly Debt:</strong> $<%= application.total_monthly_debt %></p>
                 <p><strong>Total Balances:</strong> $<%= application.total_balance %></p>
-                <!-- IMPORTANT hidden id -->
+                <!-- IMPORTANT HIDDEN ID -->
                 <input type="hidden" name="application_id" value="<%= application.application_id %>">
 
-                <!-- status update -->
+                <!-- STATUS UPDATE -->
                 <label>Update Status</label>
                 <select name="status" required>
                     <option value="">Select</option>
@@ -36,8 +36,13 @@
                     <option value="approved">Approved</option>
                     <option value="denied">Denied</option>
                 </select>
-
                 <button type="submit">Update</button>
+            </form>
+
+            <!-- DELETING FORM -->
+            <form method="POST" action="/review/delete">
+                <input type="hidden" name="application_id" value="<%= application.application_id %>">
+                <button type="submit" class="delete-button">Delete Application</button>
             </form>
         </section>
     </div>

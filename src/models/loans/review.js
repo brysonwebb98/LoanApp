@@ -9,4 +9,13 @@ async function updateStatus(application_id, status) {
     return await db.query(sql, [status, application_id]);
 }
 
-export {updateStatus};
+async function deleteApplication(application_id) {
+    const sql = `
+    DELETE FROM applications
+    WHERE application_id = $1`;
+
+    const result = await db.query(sql, [application_id]);
+    return result.rowCount > 0;
+}
+
+export {updateStatus, deleteApplication};

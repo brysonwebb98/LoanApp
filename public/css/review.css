@@ -6,6 +6,7 @@ section {
     border: 1px solid black;
     width: 70%;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     justify-self: center;
     margin: 20px;
@@ -29,4 +30,8 @@ section:has(.denied) {
 
 section:has(.pending) {
     background-color: #fff3cd;
+}
+
+.delete-button {
+margin-top: 15px;
 }

@@ -6,7 +6,7 @@ import { registerPage } from "./forms/register.js";
 import { loanPage } from "./loans/dashboard.js";
 import { createUser } from "./forms/register.js";
 import {checkLogin, redirectIfLoggedIn, checkCredit, checkApplicant, checkAdmin} from "../middleware/auth.js"
-import { buildManagerDashboard, updateLoanStatus} from "./loans/review.js";
+import { buildManagerDashboard, updateLoanStatus, deleteLoanApplication} from "./loans/review.js";
 import { usersPage, updateUser } from "./users.js";
 import { registrationValidation} from "../middleware/validation/forms.js";
 
@@ -85,5 +85,8 @@ router.post("/users", checkLogin, checkAdmin, updateUser);
 
 // REVIEW POST PAGE
 router.post("/review", checkLogin, checkCredit, updateLoanStatus)
+
+// REVIEW & DELETE PAGE
+router.post("/review/delete", checkLogin, checkCredit, deleteLoanApplication);
 
 export default router;

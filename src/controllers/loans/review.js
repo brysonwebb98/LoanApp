@@ -1,5 +1,5 @@
 import { getAllApplicationsWithDebts } from "../../models/forms/application.js";
-import { updateStatus } from "../../models/loans/review.js";
+import { updateStatus, deleteApplication } from "../../models/loans/review.js";
 
 function capitalize(word) {
   if (!word) return "";
@@ -34,4 +34,31 @@ async function updateLoanStatus(req, res) {
   }
 }
 
-export {updateLoanStatus};
+async function deleteLoanApplication(req, res) {
+  try {
+    const {application_id} = req.body;
+
+    if (!application_id) {
+      req.flash("error", "Application ID not Found");
+      return res.redirect("/review");
+    }
+
+    const deleted = await deleteApplication(application_id);
+
+    if (!deleted) {
+      req.flash("error", "Application not found");
+      return res.redirect("/reivew");
+    }
+
+    req.flash("success", "Application deleted successfully.")
+    return res.redirect("/review");
+
+  } catch(err) {
+    console.error(err);
+    req.flash("error", "Unable to delete application");
+    return res.redirect("/review")
+  }
+}
+
+
+export {updateLoanStatus, deleteLoanApplication};
