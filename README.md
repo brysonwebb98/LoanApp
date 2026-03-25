@@ -21,6 +21,11 @@ This application is a server-side web system that allows users to submit loan ap
 - Managers can approve or deny applications
 - Application decisions are saved and visible to the user
 
+### Admin Features
+- View all registered users and their roles
+- Update user roles
+- Delete users from the system
+
 ---
 
 ## MVC Architecture
@@ -71,6 +76,36 @@ Middleware responsibilities include:
 
 This ensures that only authorized users can access protected parts of the system.
 
+--- 
+
+## Authentication, Authorization, and Flash Messages
+
+This application uses **session-based authentication** to verify user identity.  
+After a successful login, the user's `user_id` and `role` are stored in the session, allowing secure access to protected routes.
+
+**Authorization** is handled through role-based middleware that controls what each user can do:
+
+- Applicants can submit loan applications and view their status  
+- Credit managers can review, approve, or deny applications  
+- Admins can manage system-level features of updating users roles or deleting users
+
+If a user attempts to access a restricted route, they are redirected and shown an appropriate message.
+
+The system also uses **flash messages** to provide feedback after important actions such as login attempts, application submission, or loan decision updates.  
+Flash messages are temporarily stored in the session (`req.session`) and displayed on the next page load, then automatically cleared.
+
+--- 
+
+## Tech Stack
+
+- Node.js
+- Express.js
+- PostgreSQL
+- EJS templating
+- Session-based authentication
+- MVC architecture
+- Render deployment platform
+
 ---
 
 ## Project Goals
@@ -81,7 +116,7 @@ This ensures that only authorized users can access protected parts of the system
 - Apply middleware for authentication and authorization
 - Follow backend development best practices
 
---- 
+---
 
 ## Website GitHub
 https://github.com/brysonwebb98/LoanApp
