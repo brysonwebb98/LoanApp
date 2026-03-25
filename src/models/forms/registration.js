@@ -31,4 +31,15 @@ async function emailExists(email) {
     return result.rowCount > 0;
 }
 
-export {insertUser, emailExists};
+async function usernameExists(username) {
+    const sql = `
+    SELECT username
+    FROM users
+    WHERE username = $1
+    `;
+
+    const result = await db.query(sql, [username]);
+    return result.rowCount > 0;
+}
+
+export {insertUser, emailExists, usernameExists};

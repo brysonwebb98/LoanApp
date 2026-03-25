@@ -1,4 +1,4 @@
-import {insertUser, emailExists} from "../../models/forms/registration.js"
+import {insertUser, emailExists, usernameExists} from "../../models/forms/registration.js"
 import { validationResult } from "express-validator";
 import bcrypt from "bcrypt";
 
@@ -40,6 +40,11 @@ async function createUser(req, res) {
 
         if (await emailExists(email)) {
             req.flash("error", "Email already registered");
+            return res.redirect("/register")
+        }
+
+        if (await usernameExists(username)) {
+            req.flash("error", "Username already registered");
             return res.redirect("/register")
         }
 
